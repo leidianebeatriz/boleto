@@ -41,28 +41,25 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
  */
 public class MeuPrimeiroBoleto {
 
-    public static void main(String[] args) {
-
+    public MeuPrimeiroBoleto (String dados) {
         /*
                  * INFORMANDO DADOS SOBRE O CEDENTE.
          */
-        Cedente cedente = new Cedente("PROJETO JRimum", "00.000.208/0001-00");
-
+        Cedente cedente = new Cedente(dados.get(),dados.get());
         /*
                  * INFORMANDO DADOS SOBRE O SACADO.
          */
-        Sacado sacado = new Sacado("JavaDeveloper Pronto Para Férias", "222.222.222-22");
+        Sacado sacado = new Sacado(dados.get(),dados.get());
 
         // Informando o endereço do sacado.
         Endereco enderecoSac = new Endereco();
         enderecoSac.setUF(UnidadeFederativa.RN);
-        enderecoSac.setLocalidade("Natal");
-        enderecoSac.setCep(new CEP("59064-120"));
-        enderecoSac.setBairro("Grande Centro");
-        enderecoSac.setLogradouro("Rua poeta dos programas");
-        enderecoSac.setNumero("1");
+        enderecoSac.setLocalidade(dados.get());
+        enderecoSac.setCep(new CEP(dados.get()));
+        enderecoSac.setBairro(dados.get());
+        enderecoSac.setLogradouro(dados.get());
+        enderecoSac.setNumero(dados.get());
         sacado.addEndereco(enderecoSac);
-
         /*
                  * INFORMANDO DADOS SOBRE O SACADOR AVALISTA.
          */
@@ -83,20 +80,20 @@ public class MeuPrimeiroBoleto {
          */
         // Informando dados sobre a conta bancária do título.
         ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.BANCO_DO_BRASIL.create());
-        contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "0"));
+        contaBancaria.setNumeroDaConta(new NumeroDaConta(Integer.parseInt(dados.get()), dados.get()));
         contaBancaria.setCarteira(new Carteira(30));
-        contaBancaria.setAgencia(new Agencia(1234, "1"));
+        contaBancaria.setAgencia(new Agencia(Integer.parseInt(dados.get()), dados.get()));
 
         Titulo titulo = new Titulo(contaBancaria, sacado, cedente, sacadorAvalista);
-        titulo.setNumeroDoDocumento("123456");
-        titulo.setNossoNumero("99345678912");
-        titulo.setDigitoDoNossoNumero("5");
-        titulo.setValor(BigDecimal.valueOf(0.23));
+        titulo.setNumeroDoDocumento(dados.get());
+        titulo.setNossoNumero(dados.get());
+        titulo.setDigitoDoNossoNumero(dados.get());
+        titulo.setValor(BigDecimal.valueOf(Double.parseDouble(dados.get())));
         titulo.setDataDoDocumento(new Date());
         titulo.setDataDoVencimento(new Date());
         titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
         titulo.setAceite(EnumAceite.A);
-        titulo.setDesconto(new BigDecimal(0.05));
+        titulo.setDesconto(new BigDecimal(Double.parseDouble(dados.get())));
         titulo.setDeducao(BigDecimal.ZERO);
         titulo.setMora(BigDecimal.ZERO);
         titulo.setAcrecimo(BigDecimal.ZERO);
